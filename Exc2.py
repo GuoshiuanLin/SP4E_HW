@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from optimizer import quadratic, optimizer
 from scipy.sparse import linalg
 import argparse
-from GMRes_1 import gmres
+from GMRES import gmres
 
 def arg_paser ():
     
