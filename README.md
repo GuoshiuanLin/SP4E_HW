@@ -10,8 +10,8 @@
 - matplotlib
   
 ### Exercise 1
-- optimizer.py: file that optimizes and returns the quadradic function using different methods
-- plot.py: file that plots the iteration processes
+- optimizer.py: file that optimizes the quadradic function and returns the solutions using different methods
+- plot.py: file that plots the iteration processes during minimizing the quadradic function
 - run_exsercise1.ipynb: file that runs optimizer.py and plot.py
 
 ### Exercise 2
