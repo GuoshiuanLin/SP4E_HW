@@ -1,7 +1,7 @@
 
 import numpy as np
 from matplotlib import pyplot as plt
-from optimizer import quadratic, optimizer
+from optimizer import quadratic
 from scipy.sparse import linalg
 import argparse
 from GMRES import gmres
