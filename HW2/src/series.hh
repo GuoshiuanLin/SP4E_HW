@@ -8,6 +8,9 @@
 class Series{
 public:
 virtual double compute(unsigned int N) = 0;
+virtual double getAnalyticPrediction() {
+        return nan("");
+    }
 };
 
 // child class that computes the sum of 1,2,..., N
@@ -44,7 +47,9 @@ public:
         pi = sqrt(pi);
         return pi;
     }
-
+    double getAnalyticPrediction() override {
+        return M_PI; 
+    }
 };
 
 #endif // SERIES_HH
