@@ -4,14 +4,25 @@
 #include <iostream>
 #include "series.hh"
 #include <fstream>
+#include <iomanip> 
 
 class DumperSeries{
 public:
-virtual void dump() = 0;
+// virtual void dump() = 0;
+virtual void dump(std::ostream & os) = 0;
+virtual void setPrecision(unsigned int precision){
+    precision_ = precision;
+}
+// Declare the operator overload for << 
+friend std::ostream & operator <<(std::ostream & stream, DumperSeries & _this);
+
 protected:
 Series & series;
+unsigned int precision_; // Store precision
+
     // Constructor to initialize the reference to a Series object
-    DumperSeries(Series& s) : series(s) {
+    // Default precision is 6
+    DumperSeries(Series& s) : series(s), precision_(6) {
     }
 };      
 
@@ -26,7 +37,7 @@ class WriteSeries : public DumperSeries{
     void setSeparator(char sep) {
         separator = sep;
     }
-    void dump() override {
+    void dump(std::ostream &os = std::cout) override {
         std::string fileExtension;
         
         // Determine the file extension based on the separator
@@ -71,15 +82,21 @@ class PrintSeries : public DumperSeries {
     }
     
     // Override the Method dump
-    void dump() override {
-        std::cout << "frequency is " << frequency << " maxiter is " << maxiter << std::endl;
+    void dump(std::ostream &os = std::cout) override {
+        // std::cout << "frequency is " << frequency << " maxiter is " << maxiter << std::endl;
         if (std::isnan(series.getAnalyticPrediction())){
             for (int i = 1; i <= maxiter; i+=frequency){
-            std::cout << "at " << i << "th step, result is " << series.compute(i) << std::endl;
+            // std::cout << "at " << i << "th step, result is " << series.compute(i) << std::endl;
+            // Set the precision for the output stream
+            os << std::setprecision(precision_);
+            os << "At " << i << " th step, result is " << series.compute(i) << std::endl;
         }
         } else {
             for (int i = 1; i <= maxiter; i+=frequency){
-            std::cout << "at " << i << "th step, result is " << series.compute(i) << ". Convergence = " << series.getAnalyticPrediction()-series.compute(i) << std::endl;
+            // std::cout << "at " << i << "th step, result is " << series.compute(i) << ". Convergence = " << series.getAnalyticPrediction()-series.compute(i) << std::endl;
+            // Set the precision for the output stream
+            os << std::setprecision(precision_);
+            os << "At " << i << " th step, result is " << series.compute(i) << ". Convergence = " << series.getAnalyticPrediction()-series.compute(i) << std::endl;
         }
     }
 };

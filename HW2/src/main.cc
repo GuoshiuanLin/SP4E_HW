@@ -1,12 +1,24 @@
 #include <iostream>
+#include <fstream>
 #include "series.hh"
 #include "dumper.hh"
 
 int main(int argc, char *argv[]) {
-    int N = std::atoi(argv[1]); //N: the maximum iterator
-    int M = std::atoi(argv[2]); //M: if 0: ComputeArithmetic. if 1: Compute Pi
-    int freq = std::atoi(argv[3]); //freq: frequnecy to output results to the screen
-    std::string dumperType = argv[4]; // 'print' or 'write'
+    // int N = std::atoi(argv[1]); //N: the maximum iterator
+    // int M = std::atoi(argv[2]); //M: if 0: ComputeArithmetic. if 1: Compute Pi
+    // int freq = std::atoi(argv[3]); //freq: frequnecy to output results to the screen
+    // std::string dumperType = argv[4]; // 'print' or 'write'
+
+    // Create a stringstream object to concatenate the arguments
+    std::stringstream argsConcatenated;
+    // Concatenate the arguments into a single string
+    for (int i = 1; i < argc; ++i) {
+        argsConcatenated << argv[i] << " ";
+    }
+    // Extract the values from the concatenated string
+    int N, M, freq;
+    std::string dumperType;
+    argsConcatenated >> N >> M >> freq >> dumperType;
 
     if (N <= 0) {
         std::cout << "N should be a positive integer." << std::endl;
@@ -41,7 +53,19 @@ int main(int argc, char *argv[]) {
   // determines to print or write 
   if (dumperType=="print"){
       PrintSeries object(freq, N, *numberSum);
+      // Create and open a file stream for writing to a file
+      std::ofstream outputFile("print_output.txt");
+      if (outputFile.is_open()) {
+        // Call dump with the file stream as the argument
+        object.dump(outputFile);
+        // Close the file stream when done
+        outputFile.close();
+    } else  {
+      std::cerr << "Failed to open the output file." << std::endl;
+    }
+      // Call dump with the standard output stream (std::cout)
       object.dump();
+      
   } else if (dumperType=="write"){
       WriteSeries object(N, *numberSum);
       object.setSeparator(' '); // choose the seperator: , or |. Otherwise create .txt file
