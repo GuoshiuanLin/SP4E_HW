@@ -33,3 +33,6 @@ For example,\
   - `setPrecision()`: set the precision of the numerical output to the screen
 - main.cc
   - setSeparator(): choose the seperator: `,`, `|`, or ` ` for the output file type `.csv`, `.psv`, or `.txt`   
+
+### plotting the results of interation 
+- plot.ipynb
