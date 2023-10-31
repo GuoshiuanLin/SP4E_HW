@@ -21,12 +21,16 @@ In the main directory HW2/\
 ### Run the program
 `./src/main arg1 arg2 arg3 arg4`
 - arg1: int, the maximum iterator
-- arg2: int, 0 or 1. 0: Instantiate ComputeArithmetic. 1: Instantiate ComputePi
+- arg2: int, 0 or 1. 0: Instantiate ComputeArithmetic. 1: Instantiate ComputePi. 2: RiemannIntegral 
 - arg3: int, frequnecy to output results to the screen
 - arg4: string, 'print':print result to the screen with the frequency (arg3) or 'write': write and save to file (every iteration step)\
 For example,\
 `./src/main 20 0 2 'print'` would print the iteration of ComputeArithmetic to the screen with frequency 2 up to maximum iterator 20\
 `./src/main 30 1 5 'write'` would write the iteration up to 30 of ComputePi to output file. the frequency argument does not matter in this case, because every step is written.
+`./src/main 10* 2 0 1 cube 100` would run the RiemannIntegral from 0 to 1, for the cube function with 100 iterations.
+
+*Note that for RiemannIntegral from the main file number of iterations is not part of the code. It's just important to include a positive integer (10+) at the beginning of the code.
+In general, for RiemannIntegral after writing `./src/main 10 2` instructions provided under the Excercise 6: Integral - RiemannIntegral can be followed.
 
 ### Configuration
 - dumper.hh
@@ -39,6 +43,7 @@ For example,\
 
 ### Excercise 6: Integral: Riemann Integral - 
 
+At the end, we gave the option to run the subject of task 6 "RiemannIntegral" as a separate file. It is possible to use both options (from main file and separate file).
 To run the integral operations (using RiemannIntegral.cc) the arguments needed are the following:
 
 - ```Enter the lower bound (a)```: lower limit of the definite integral.
