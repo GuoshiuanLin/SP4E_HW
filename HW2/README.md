@@ -36,3 +36,36 @@ For example,\
 
 ### plotting the results of interation 
 - plot.ipynb
+
+### Excercise 6: Integral: Riemann Integral - 
+
+To run the integral operations (using RiemannIntegral.cc) the arguments needed are the following:
+
+- ```Enter the lower bound (a)```: lower limit of the definite integral.
+- ```Enter the upper bound (b)```: upper limit of the definite integral.
+- ```Choose the functionType```: type of the function inside the integral.
+    - "cos" for cosine
+    - "sin" for sine
+    - "cube" for cubic function.
+- ```Enter the number of intervals```: number of used intervals.   
+
+An example set of program arguments for taking the integral of a cubic function from 0 to 1.
+```g++
+./RiemannIntegral 0 1 cube 100 
+```
+An example set of program arguments for taking the integral of a cosine function from 0 to pi.
+```g++
+./RiemannIntegral 0 3.141592 cos 1000
+```
+An example set of program arguments for taking the integral of a sine function from 0 to pi/2.
+```g++
+./RiemannIntegral 0 1.570796  sin 100
+```
+
+***Exercise 6.4:*** 
+_Do you get the values expected ? For each function, at which value of N do you get the value expected
+(~2 digits after the decimal point)?_
+
+Case 1 - cube - min N needed: 1e2 for 2 digits: 0.245025 (correct value is 0.25)
+Case 2 - cos - min N needed: 1e3 for 2 digits: 0.00314225 (correct value is 0)
+Case 3 - sin - min N needed: 1e2 for 2 digits: 0.992125 (correct value is 1)
