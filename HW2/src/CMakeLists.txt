@@ -1,1 +1,1 @@
-add_executable(main main.cc)
+add_executable(main main.cc, RiemannIntegral cc)
