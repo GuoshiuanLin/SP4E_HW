@@ -37,23 +37,6 @@ For example,\
 ### plotting the results of interation 
 - plot.ipynb
 
-### Excercise 5
-
-***Exercise 5.1:***
-Q: Evaluate the global complexity of your program.
-A: The global complexity of our program is 0(n) for both child classes, ComputeArithmetic and ComputePi, where n is the value passed to the compute method. 
-ComputeArithmetic child class iterates from 1 to n in a loop, and at each iteration, it performs a constant amount of work (addition).  ComputePi child class also iterates from 1 to N in a loop. In each iteration, it performs a constant amount of work (addition, division, multiplication). Therefore, the time complexity of this method is 0(n).
-Therefore, in both cases, the time complexity is linear (0(n)) with respect to the input value N. The getAnalyticPrediction method has constant time complexity and doesn't depend on the input size, so it is considered 0(1).
-Overall, the global complexity of the program is determined by the time complexity of the methods in the child classes. In this case, it is 0(N) due to the linear relationship between the input size (N) and the computational effort.
-
-***Exercise 5.4:***
-Q: How is the complexity now?
-A: The complexity of the program remains the same after the modification. The modification primarily addresses code reusability and prevents re-computation of series elements, but it does not change the fundamental time complexity of the program. The program's overall complexity remains 0(n) for both child classes.
-
-***Exercise 5.5:***
-Q: In the case you want to reduce the rounding errors over floating point operation by summing terms reversely, what is the best complexity you can achieve ?
-A: In this case, the complexity will be 0(n) because the number of operations executed does not change.
-
 ### Excercise 6: Integral: Riemann Integral - 
 
 To run the integral operations (using RiemannIntegral.cc) the arguments needed are the following:
@@ -78,11 +61,3 @@ An example set of program arguments for taking the integral of a sine function f
 ```g++
 ./RiemannIntegral 0 1.570796  sin 100
 ```
-
-***Exercise 6.4:*** 
-_Do you get the values expected ? For each function, at which value of N do you get the value expected
-(~2 digits after the decimal point)?_
-
-Case 1 - cube - min N needed: 1e2 for 2 digits: 0.245025 (correct value is 0.25)
-Case 2 - cos - min N needed: 1e3 for 2 digits: 0.00314225 (correct value is 0)
-Case 3 - sin - min N needed: 1e2 for 2 digits: 0.992125 (correct value is 1)
