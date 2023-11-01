@@ -1,6 +1,7 @@
 # SP4E_HW
-## homeworks for SP4E 2023
-## Assignment 2
+## Introduction 
+This is the homework for SP4E 2023 Assignment 2
+
 ### Authors
 - Jakov Oreb: exercise 5 & 6
 - Guo-Shiuan Lin: exercise 1 to 4 \
@@ -8,29 +9,37 @@ The best way to divide the work is to have the files for exercises 1-4 ready (es
 At first, Guo-Shiuan finished and pushed exercises 1-2 very quickly so Jakov could continue with exercise 6 without a long wait.\
 Exercise 5 was done at the end because exercise 1-4 has to be done before that.
  
-### Required Python packages
+### Prerequisites
+- C++ Compiler
+- python
 - matplotlib
   
-### Configure and build the project 
-In the main directory HW2/\
+### Installation
+`git clone https://github.com/GuoshiuanLin/SP4E_HW.git`\
+`cd HW2`: enter the main directory\
 `mkdir build`\
 `cd build`\
 `ccmake ..`\
 `make`
 
-### Run the program
+### Getting started
 `./src/main arg1 arg2 arg3 arg4`
 - arg1: int, the maximum iterator
-- arg2: int, 0 or 1. 0: Instantiate ComputeArithmetic. 1: Instantiate ComputePi. 2: RiemannIntegral 
+- arg2: string, 'ComputeArithmetic', 'ComputePi', or 'RiemannIntegral' 
 - arg3: int, frequnecy to output results to the screen
 - arg4: string, 'print':print result to the screen with the frequency (arg3) or 'write': write and save to file (every iteration step)\
 For example,\
-`./src/main 20 0 2 'print'` would print the iteration of ComputeArithmetic to the screen with frequency 2 up to maximum iterator 20\
-`./src/main 30 1 5 'write'` would write the iteration up to 30 of ComputePi to output file. the frequency argument does not matter in this case, because every step is written.
-`./src/main 10* 2 0 1 cube 100` would run the RiemannIntegral from 0 to 1, for the cube function with 100 iterations.
+`./src/main 20 'ComputeArithmetic' 2 'print'` would print the iteration of ComputeArithmetic to the screen with frequency 2 up to maximum iterator 20\
+`./src/main 30 'ComputePi' 5 'write'` would write the iteration up to 30 of ComputePi to output file. the frequency argument does not matter in this case, because every step is written.
+`./src/main 100 'RiemannIntegral' 1 'print'` would run the RiemannIntegral with 100 iterations, arg3 and arg4 are null when arg2 is `'RiemannIntegral'`.
 
-*Note that for RiemannIntegral from the main file number of iterations is not part of the code. It's just important to include a positive integer (10+) at the beginning of the code.
-In general, for RiemannIntegral after writing `./src/main 10 2` instructions provided under the Excercise 6: Integral - RiemannIntegral can be followed.
+For `RiemannIntegral` after entering `./src/main arg1 arg2 arg3 arg4` in the command terminal, follow the interactive instruction below.
+- ```Enter the lower bound (a)```: lower limit of the definite integral.
+- ```Enter the upper bound (b)```: upper limit of the definite integral.
+- ```Choose the functionType```: type of the function inside the integral.
+    - "cos" for cosine
+    - "sin" for sine
+    - "cube" for cubic function.
 
 ### Configuration
 - dumper.hh
@@ -38,31 +47,17 @@ In general, for RiemannIntegral after writing `./src/main 10 2` instructions pro
 - main.cc
   - setSeparator(): choose the seperator: `,`, `|`, or ` ` for the output file type `.csv`, `.psv`, or `.txt`   
 
-### plotting the results of interation 
-- plot.ipynb
+### Plotting
+Run in the command terminal: `python plot.py`
 
-### Excercise 6: Integral: Riemann Integral - 
-
-At the end, we gave the option to run the subject of task 6 "RiemannIntegral" as a separate file. It is possible to use both options (from main file and separate file).
-To run the integral operations (using RiemannIntegral.cc) the arguments needed are the following:
-
-- ```Enter the lower bound (a)```: lower limit of the definite integral.
-- ```Enter the upper bound (b)```: upper limit of the definite integral.
-- ```Choose the functionType```: type of the function inside the integral.
-    - "cos" for cosine
-    - "sin" for sine
-    - "cube" for cubic function.
-- ```Enter the number of intervals```: number of used intervals.   
-
-An example set of program arguments for taking the integral of a cubic function from 0 to 1.
-```g++
-./RiemannIntegral 0 1 cube 100 
-```
-An example set of program arguments for taking the integral of a cosine function from 0 to pi.
-```g++
-./RiemannIntegral 0 3.141592 cos 1000
-```
-An example set of program arguments for taking the integral of a sine function from 0 to pi/2.
-```g++
-./RiemannIntegral 0 1.570796  sin 100
-```
+### Main Classes
+#### `ComputeArithmetic`
+compute the sum of 1,2,..., N
+#### `ComputePi`
+compute approximation of Pi using integers from 1, 2, ..., to N
+#### `RiemannIntegral`
+compute Riemann integral of one of the three functions
+#### `WriteSeries`
+write results at every step to file output.fileType
+#### `PrintSeries`
+print results at defined frequency to screen and save in print_output.txt
