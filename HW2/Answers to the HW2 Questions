@@ -24,8 +24,8 @@ Case 2 - cos - min N needed: 1e3 for 2 digits: 0.00314225 (correct value is 0)
 Case 3 - sin - min N needed: 1e2 for 2 digits: 0.992125 (correct value is 1)
 
 Conclusion: 
-Below is the repeated answer to question 2.1 (after completing the Homework) and the best strategy related to "How to divide the workload among ourselves." We think that we may not have
-chosen the best tactic since, to implement Exercise 6 in the main file, it is necessary to select a "random" number (>10) before using it, which might create unnecessary questions for the File user. 
-In any case, it would have been better if we had agreed on the tactics for implementing the code for Exercise 6 earlier to avoid this part. 
+Below is the repeated answer to question 2.1 -"How to divide the workload among ourselves" after completing the homework. We think that we may not have
+chosen the best tactic, because Exercise 6 (RiemenIntegra) now has a different (interactive) interface than the other parts of the project, which might create unnecessary confusion for the File user. 
+A better strategy is to agree on the structure of the code for Exercise 6 earlier to enhance code compatibility. 
 The strategy related to division is good because we could mutually control the implementation of tasks 2 - 4 during task 5 and task 6 independently, which saved us some time and enabled us to control each other's work. 
-In any case, we hope to learn to plan work better from this type of conclusion.
+In any case, we hope to learn to plan work better from this conclusion.
