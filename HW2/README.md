@@ -47,8 +47,6 @@ For `RiemannIntegral` after entering `./src/main arg1 arg2 arg3 arg4` in the com
 - main.cc
   - setSeparator(): choose the seperator: `,`, `|`, or ` ` for the output file type `.csv`, `.psv`, or `.txt`   
 
-### Plotting
-Run in the command terminal: `python plot.py`
 
 ### Main Classes
 #### `ComputeArithmetic`
@@ -61,3 +59,9 @@ compute Riemann integral of one of the three functions
 write results at every step to file output.fileType
 #### `PrintSeries`
 print results at defined frequency to screen and save in print_output.txt
+
+
+### Plotting
+Run in the command terminal: `python plot.py`
+### Textual answers
+Textual answers to exercise 2,5,6 are in the file `Answers to the HW2 Questions`
