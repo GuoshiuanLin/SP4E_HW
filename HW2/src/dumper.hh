@@ -6,9 +6,9 @@
 #include <fstream>
 #include <iomanip> 
 
+// parent class Series that set the interface
 class DumperSeries{
 public:
-// virtual void dump() = 0;
 virtual void dump(std::ostream & os) = 0;
 virtual void setPrecision(unsigned int precision){
     precision_ = precision;
@@ -20,12 +20,13 @@ protected:
 Series & series;
 unsigned int precision_; // Store precision
 
-    // Constructor to initialize the reference to a Series object
-    // Default precision is 6
-    DumperSeries(Series& s) : series(s), precision_(6) {
-    }
+// Constructor to initialize the reference to a Series object
+// Default precision is 6
+DumperSeries(Series& s) : series(s), precision_(6) {
+}
 };      
 
+// child clss WriteSeries that writes all steps before reaching maximim iterator to the defined file type
 class WriteSeries : public DumperSeries{
     public:
     int maxiter;
@@ -33,13 +34,13 @@ class WriteSeries : public DumperSeries{
     // Constructor to initialize N
     WriteSeries(int max, Series& s) : maxiter(max), DumperSeries(s) {
     }
-    // Function to set the separator
+    // Method to set the separator
     void setSeparator(char sep) {
         separator = sep;
     }
+    // Method to write the file
     void dump(std::ostream &os = std::cout) override {
-        std::string fileExtension;
-        
+        std::string fileExtension;       
         // Determine the file extension based on the separator
         if (separator == ',') {
             fileExtension = ".csv";
@@ -52,27 +53,29 @@ class WriteSeries : public DumperSeries{
         std::string fileName = "output" + fileExtension;
         // Open a file for writing
         std::ofstream outputFile(fileName);
-        // if series is ComputeArthimetic, else series is ComputePi
+        
         if (std::isnan(series.getAnalyticPrediction())){
+            // series is ComputeArthimetic
+            // Write the result of every step to the file with the specified separator
             for (int i = 1; i <= maxiter; i+=1){
             double result = series.compute(i);
-            // Write the result to the file with the specified separator
             outputFile << result << separator << std::endl;
         }
         outputFile.close();
         } else {
+            // series is ComputePi
             for (int i = 1; i <= maxiter; i+=1){
             double result = series.compute(i);
-            // Write the result to the file with the specified separator
             outputFile << result << separator << std::endl;
         }
-        // write the anlytical value at the end of the file
+        // write also the anlytical value at the end of the file
         outputFile << series.getAnalyticPrediction() << std::endl;
         outputFile.close();
     }
     }
 };
 
+// child class that prints the result to screen at defined frequency until reaching maximum iterator
 class PrintSeries : public DumperSeries {
     public:
     int frequency;
@@ -81,20 +84,17 @@ class PrintSeries : public DumperSeries {
     PrintSeries(int freq, int max, Series& s) : frequency(freq), maxiter(max), DumperSeries(s) {
     }
     
-    // Override the Method dump
+    // Method to print the result to screen
     void dump(std::ostream &os = std::cout) override {
-        // std::cout << "frequency is " << frequency << " maxiter is " << maxiter << std::endl;
         if (std::isnan(series.getAnalyticPrediction())){
+            // series is ComputeArthimetic
             for (int i = 1; i <= maxiter; i+=frequency){
-            // std::cout << "at " << i << "th step, result is " << series.compute(i) << std::endl;
-            // Set the precision for the output stream
             os << std::setprecision(precision_);
             os << "At " << i << " th step, result is " << series.compute(i) << std::endl;
         }
         } else {
+            // series is ComputePi
             for (int i = 1; i <= maxiter; i+=frequency){
-            // std::cout << "at " << i << "th step, result is " << series.compute(i) << ". Convergence = " << series.getAnalyticPrediction()-series.compute(i) << std::endl;
-            // Set the precision for the output stream
             os << std::setprecision(precision_);
             os << "At " << i << " th step, result is " << series.compute(i) << ". Convergence = " << series.getAnalyticPrediction()-series.compute(i) << std::endl;
         }

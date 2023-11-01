@@ -12,10 +12,6 @@
 
 
 int main(int argc, char *argv[]) {
-    // int N = std::atoi(argv[1]); //N: the maximum iterator
-    // int M = std::atoi(argv[2]); //M: if 0: ComputeArithmetic. if 1: Compute Pi
-    // int freq = std::atoi(argv[3]); //freq: frequnecy to output results to the screen
-    // std::string dumperType = argv[4]; // 'print' or 'write'
 
     // Create a stringstream object to concatenate the arguments
     std::stringstream argsConcatenated;
@@ -24,39 +20,32 @@ int main(int argc, char *argv[]) {
         argsConcatenated << argv[i] << " ";
     }
     // Extract the values from the concatenated string
-    int N, M, freq;
+    int maxiter, freq;
+    std::string SeriesType;
     std::string dumperType;
-    argsConcatenated >> N >> M >> freq >> dumperType;
+    argsConcatenated >> maxiter >> SeriesType >> freq >> dumperType;
 
-    if (N <= 0) {
+    // make sure maximum iterator is above 0
+    if (maxiter <= 0) {
         std::cout << "N should be a positive integer." << std::endl;
     } 
     Series* numberSum = nullptr;
-    if (M==0){
-      // Instanciate a ComputeArithmetic object and call the compute method
+    if (SeriesType=="ComputeArithmetic"){
+      // Instanciate a ComputeArithmetic object 
       numberSum = new ComputeArithmetic();
-      // ComputeArithmetic numberSum;
-      // double result = numberSum.compute(N)->compute(N);
-      std::cout << "The sum of numbers from 1 to " << N << " is: " << std::endl;
-      // std::cout << "The sum of numbers from 1 to " << N << " is: " << result << std::endl;
-      // Instanciate a PrintSeries object and call the dump method
-      // PrintSeries object(freq, N, numberSum);
-      // object.dump();
+      // show final result to the screen
+      std::cout << "The sum of numbers from 1 to " << maxiter << " is: " << std::endl;
     }
-    else if (M==1){
-      // Instanciate a ComputePi object and call the compute method
+    else if (SeriesType=="ComputePi"){
+      // Instanciate a ComputePi object 
       numberSum = new ComputePi();
-      // ComputePi numberSum;
-      // double result = numberSum.compute(N);
-      std::cout << "Pi convergene using integers from 1 to " << N << " is: " << std::endl;
-      // std::cout << "Pi convergene using integers from 1 to " << N << " is: " << result << std::endl;
-      // Instanciate a PrintSeries object and call the dump method
-      // PrintSeries object(freq, N, numberSum);
-      // object.dump();
+      // show final result to the screen
+      std::cout << "Pi convergene using integers from 1 to " << maxiter << " is: " << std::endl;
     }
-    else if (M==2){ //To calculate RiemannIntegral using the main file
+    else if (SeriesType=="RiemannIntegral"){ 
+      // Let the user define the lower and upper bound and the funtion to instanciate a RiemannIntegral object 
       std::string functionType;
-
+      // User should enter the lower and upper bound
       std::cout <<"Enter the lower bound (a):";
       double lowerBound;
       std::cin >> lowerBound;
@@ -64,7 +53,7 @@ int main(int argc, char *argv[]) {
       std::cout <<"Enter the upper bound (b):";
       double upperBound;
       std::cin >> upperBound;
-
+      // User should choose one of the functions 'cube', 'cos', or 'sin' to implement
       std::cout << "Choose the function type ('cube', 'cos', or 'sin'): ";
       std::cin >> functionType;   
 
@@ -92,43 +81,40 @@ int main(int argc, char *argv[]) {
       return 1; //Exit with and error code
       }
 
-      int numIntervals;
-      std::cout <<"Enter the number of intervals:";
-      std::cin >> numIntervals;
-
-      //Create a Riemann Integral object
-
-      RiemannIntegral riemann (function, lowerBound, upperBound, numIntervals);
-      //Calculate the Riemann sum
-
-      double result = riemann.CalculateRiemannSum();
-      std::cout <<"Integral of function" <<functionType << "from" <<lowerBound<< "to" <<upperBound << ":" << result << std::endl;
-
+      //Instanciate a RiemannIntegral object 
+      numberSum = new RiemannIntegral(function, lowerBound, upperBound);
+      //Calculate the Riemann integral
+      double result = numberSum->compute(maxiter);
+      // print the final result to the screen
+      std::cout <<"Integral of function " <<functionType << " from " <<lowerBound<< " to " <<upperBound << ": " << result << std::endl;
     }
      
-  double result = numberSum->compute(N);
+  // print result of the summation of ComputeArithmetic or ComputePi to the screen
+  double result = numberSum->compute(maxiter);
   std::cout << result << std::endl;
 
   // determines to print or write 
   if (dumperType=="print"){
-      PrintSeries object(freq, N, *numberSum);
+      // save results to print_output.txt and print results to screen 
+      PrintSeries print_series(freq, maxiter, *numberSum);
       // Create and open a file stream for writing to a file
       std::ofstream outputFile("print_output.txt");
       if (outputFile.is_open()) {
         // Call dump with the file stream as the argument
-        object.dump(outputFile);
+        print_series.dump(outputFile);
         // Close the file stream when done
         outputFile.close();
     } else  {
       std::cerr << "Failed to open the output file." << std::endl;
     }
       // Call dump with the standard output stream (std::cout)
-      object.dump();
+      print_series.dump();
       
   } else if (dumperType=="write"){
-      WriteSeries object(N, *numberSum);
-      object.setSeparator(' '); // choose the seperator: , or |. Otherwise create .txt file
-      object.dump();
+      // write results to file
+      WriteSeries write_series(maxiter, *numberSum);
+      write_series.setSeparator(' '); // choose the seperator: , or |. Otherwise create .txt file
+      write_series.dump();
   }
   delete numberSum;
     

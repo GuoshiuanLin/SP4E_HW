@@ -1,1 +1,5 @@
-build
+# Ignore log files
+*.log
+
+# Ignore build artifacts
+build/
