@@ -17,10 +17,12 @@ public:
 
   Real & getTemperature(){return temperature;};
   Real & getHeatRate(){return heat_rate;};
+  bool & isBoundary(){return boundary;};
   
 private:
   Real temperature;
   Real heat_rate;
+  bool boundary;
 };
 
 /* -------------------------------------------------------------------------- */
