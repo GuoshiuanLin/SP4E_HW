@@ -8,11 +8,13 @@
 #include "my_types.hh"
 #include <functional>
 
+
 //! Compute contact interaction between ping-pong balls
 class ComputeTemperature : public Compute {
 
   // Virtual implementation
 public:
+
   ComputeTemperature();
   ~ComputeTemperature() override = default;
   
@@ -23,6 +25,7 @@ public:
   Real HeatCapacity;      // Heat capacity
   Real HeatConductivity;  // Heat Conductivity
   Real DeltaT;            // Time step for integration
+
 };
 
 /* -------------------------------------------------------------------------- */
