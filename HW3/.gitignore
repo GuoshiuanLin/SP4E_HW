@@ -1,0 +1,6 @@
+# Ignore log files
+*.log
+
+# Ignore build artifacts and Doxygen files
+build/
+html/
