@@ -33,7 +33,9 @@ add_library(part
   )
 
 add_executable(particles main.cc)
-target_link_libraries(particles gtest_main gtest pthread part)
+
+find_library( FFTW_LIBRARIES fftw3 libfftw3-dev)
+target_link_libraries(particles gtest_main gtest pthread part ${FFTW_LIBRARIES})
 
 #####
 #####
@@ -51,9 +53,13 @@ if(EXISTS "${PROJECT_SOURCE_DIR}/googletest/CMakeLists.txt")
   add_subdirectory(googletest)
   add_executable(test_kepler test_kepler.cc)
   add_executable(test_fft test_fft.cc)
+  add_executable(test_temp test_temp.cc)
+
   target_link_libraries(test_kepler part gtest_main gtest pthread )
   target_link_libraries(test_fft part gtest_main gtest pthread ${FFTW_LIBRARIES})
-  add_custom_target(test ./test_kepler && ./test_fft DEPENDS part test_kepler test_fft)
+  target_link_libraries(test_temp part gtest_main gtest pthread ${FFTW_LIBRARIES})
+
+  add_custom_target(test ./test_kepler && ./test_fft && ./test_temp DEPENDS part test_kepler test_fft test_temp)
 else()
   message("
 *********************************************
@@ -80,4 +86,3 @@ if (DOXYGEN_FOUND)
     )
   add_custom_target(doc DEPENDS doxygen)
 endif(DOXYGEN_FOUND)
-
