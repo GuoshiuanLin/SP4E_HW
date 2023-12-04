@@ -4,7 +4,6 @@
 #include <cmath>
 
 /* -------------------------------------------------------------------------- */
-
 /*!
  * @brief Compute Temperature class
  */
@@ -33,7 +32,7 @@ void ComputeTemperature::compute(System& system) {
     Matrix<complex> temperatureFourierInv(matrixSize);
 
     // Construct the coordinates matrix in Fourier space
-    Matrix<std::complex<int>> fourierCoordinates = FFT::computeFrequencies(matrixSize)
+    Matrix<std::complex<int>> fourierCoordinates = FFT::computeFrequencies(matrixSize);
 
     // Construct the heat and temperature matrices
     for (UInt i = 0; i < matrixSize; ++i) {
@@ -42,14 +41,14 @@ void ComputeTemperature::compute(System& system) {
             UInt particleIndex = i * matrixSize + j;
 
             // Retrieve the particle from the system
-            auto& Particle = system.getParticle(particleIndex);
+            auto& particle = system.getParticle(particleIndex);
 
             // Static casting to convert particle into material point
-            auto& MaterialPoint = static_cast<MaterialPoint&>(Particle);
+            auto& materialPoint = static_cast<MaterialPoint&>(particle);
 
             // Populate temperature and heat rate matrices
-            temperatureMatrix(i,j) = MaterialPoint.getTemperature();
-            heatMatrix(i,j) = MaterialPoint.getHeatRate();
+            temperatureMatrix(i,j) = materialPoint.getTemperature();
+            heatMatrix(i,j) = materialPoint.getHeatRate();
 
             // Uncomment the line below for debugging or visualization
             //std::cout <<"Temp: " <<temperatureMatrix(i,j) << ", Heat: " <<heatMatrix(i,j) <<std::endl;
@@ -94,20 +93,20 @@ void ComputeTemperature::compute(System& system) {
         for (UInt j = 0; j<matrixSize; ++j) {
             auto& particle = system.getParticle(i * matrixSize + j);
             
-            // Perform static casting to convert a base-class particle to a MaterialPoint
-            auto& mp = static_cast<MaterialPoint&>(particle);
+            // Perform static casting to convert a base-class particle to a materialPoint
+            auto& materialPoint = static_cast<MaterialPoint&>(particle);
 
             //If not a boundary, perform Euler integration
-            if (!mp.isBoundary()){
-                mp.getTemperature() += this->DeltaT * std::real(temperatureFourierInv(i,j));
+            if (!materialPoint.isBoundary()){
+                materialPoint.getTemperature() += this->DeltaT * std::real(temperatureFourierInv(i,j));
                 } else {
                 // For boundary points, set temperature to 0
-                mp.getTemperature() = 0.0;
+                materialPoint.getTemperature() = 0.0;
                 }
             }
 
             // Uncoment the line below for debugging or progress tracking
-            //std::cout << "Temperature " <<mp.getTemperature() << std::endl;
+            //std::cout << "Temperature " <<materialPoint.getTemperature() << std::endl;
         }
     }
 
