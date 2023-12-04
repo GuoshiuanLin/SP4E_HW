@@ -2,6 +2,7 @@
 #include "fft.hh"
 #include "material_point.hh"
 #include <cmath>
+#include <fftw3.h>
 
 /* -------------------------------------------------------------------------- */
 /*!
