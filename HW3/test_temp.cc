@@ -15,8 +15,8 @@
 /*****************************************************************/
 // Fixture class for testing random particles
 
-// Fixture class for testing random particles
-class RandomParticles : public ::testing::Test {
+// Fixture class for testing random particles and material points
+class RandomMaterialPoint : public ::testing::Test {
 protected:
     // SetUp function is called before each test case
     void SetUp() override {
@@ -104,7 +104,7 @@ private:
 /*****************************************************************/
 // Exercise 4-2 - TEST for an initial homogeneous temperature and no heat flux
 
-TEST_F(RandomParticles, HomogeneousTemperature) {
+TEST_F(RandomMaterialPoint, HomogeneousTemperature) {
     /*!
     @brief Test to check results of homogeneous temperature
     */
@@ -146,7 +146,7 @@ TEST_F(RandomParticles, HomogeneousTemperature) {
 /*****************************************************************/
 // Exercise 4-3 - TEST for a volumetric heat source 
 
-TEST_F(RandomParticles, Volumetric_Heat_Source_Ex3) {
+TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex3) {
     /*!
     @brief Test for a volumetric heat source with a sinusoidal equilibrium temperature
     */
@@ -199,7 +199,7 @@ TEST_F(RandomParticles, Volumetric_Heat_Source_Ex3) {
 /*****************************************************************/
 // Exercise 4-4 - TEST for a volumetric heat source with linear equilibrium temperature
 
-TEST_F(RandomParticles, Volumetric_Heat_Source_Ex4) {
+TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex4) {
     /*!
     @brief Test for a volumetric heat source with linear equilibrium temperature
     */
