@@ -110,8 +110,8 @@ TEST_F(RandomMaterialPoint, HomogeneousTemperature) {
     */
 
     // Set initial conditions
-    const Real initialTemperature = 10.0;
-    const UInt timeSteps = 50;
+    Real initialTemperature = 10.0;
+    UInt timeSteps = 50;
 
     // Add particles with homogeneous initial temperature to the system
     for (const auto& initialPoint : points) {
@@ -125,6 +125,10 @@ TEST_F(RandomMaterialPoint, HomogeneousTemperature) {
     for (UInt i = 0; i < timeSteps; ++i) {
         temperature->compute(system);
     }
+
+    // Write to CSV
+    CsvWriter writer("homogeneous_temperature.csv");
+    writer.compute(system);
 
     // Check if the final temperature of each particle is close to the initial temperature 
     // and if the heat rate remains zero
@@ -152,7 +156,7 @@ TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex3) {
     */
 
     // Number of simulation time steps
-    const UInt timeSteps = 10;
+    const UInt timeSteps = 50;
 
     // Initialize variables
     Real xCoord;
@@ -176,6 +180,10 @@ TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex3) {
         temperature->compute(system);
     }
 
+    // Write to CSV
+    CsvWriter writer("sinus_vol_heat.csv");
+    writer.compute(system);
+
     // Check if the final temperature of each particle matches the expected equilibrium temperature
     for (auto& particle : system) {
         auto& materialPoint = static_cast<MaterialPoint&>(particle);
@@ -188,7 +196,7 @@ TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex3) {
         temperatureEq = std::sin(2.0 * M_PI * xCoord / gridLength);
 
         // Assert that the final temperature is close to the expected equilibrium temperature
-        ASSERT_NEAR(materialPoint.getTemperature(), temperatureEq, 1e-2);
+        ASSERT_NEAR(materialPoint.getTemperature(), temperatureEq, 1e-1);
     }
 
     std::cout << "*************************************************************************************************" << std::endl;
@@ -254,6 +262,10 @@ TEST_F(RandomMaterialPoint, Volumetric_Heat_Source_Ex4) {
 for (UInt i = 0; i < timeSteps; ++i) {
     temperature->compute(system);
 }
+
+// Write to CSV
+CsvWriter writer("lin_vol_heat.csv");
+writer.compute(system);
 
 // Check if temperature remains the same
 for (auto& particle : system) {

@@ -1,7 +1,7 @@
 """
     Python script to generate a heat distribution within a provided radius as given in Equation (5)
     Usage example:
-    python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 1000 --num_particles_y 1000 --plot --radius 0.5 --filename heat_distribution.csv     
+    python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 10 --num_particles_y 10 --plot --radius 0.8 --filename heat_distribution.csv     
 """
 
 import argparse
@@ -78,7 +78,7 @@ def boundary_constraint(x, y, x_limits, y_limits):
         return 0
 
     # Assign a random temperature value if not at the boundary
-    return np.random.randint(-10, 10)
+    return np.random.randint(-100, 100)
 
 def plot_heat_distribution(num_particles_x, num_particles_y, temperature_values):
     """
