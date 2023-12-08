@@ -21,7 +21,7 @@ cd build
 For the Kepler test:
 ```
 cd build
-./test_fft
+./test_kepler
 ```
 For the Validating tests for 
 4.2 - initial homogeneous temperature and no heat flux,
@@ -31,3 +31,10 @@ For the Validating tests for
 cd build
 ./test_temp
 ```
+
+test_temp file for each test is referring to CSV Writer creates a file inside the build directory. 
+For example for Excercise 4.2, 4.3 and 4.4 written files are "homogeneous_temperature.csv", "sinus_vol_heat.csv" and "lin_vol_heat.csv" respectively.
+
+Generated .csv files can be used to control, track and visualize the results generated from every test (Ex 4.2, 4.3 and 4.4) in Paraview, as explained in continuation for Exercise 4.6 
+
+
