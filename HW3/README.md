@@ -18,11 +18,6 @@ For the FFT transform test:
 cd build
 ./test_fft
 ```
-For the Kepler test:
-```
-cd build
-./test_kepler
-```
 For the Validating tests for 
 4.2 - initial homogeneous temperature and no heat flux,
 4.3 - volumetric heat source of a sinusoidal form,
@@ -32,10 +27,10 @@ cd build
 ./test_temp
 ```
 
-test_temp file for each test is referring to CSV Writer creates a file inside the build directory. 
+test_temp file for each test refers to CSV Writer creating a file inside the build directory. 
 For example for Excercise 4.2, 4.3 and 4.4 written files are "homogeneous_temperature.csv", "sinus_vol_heat.csv" and "lin_vol_heat.csv" respectively.
 
-Generated .csv files can be used to control, track and visualize the results generated from every test (Ex 4.2, 4.3 and 4.4) in Paraview, as explained in continuation for Exercise 4.6 
+Generated .csv files can be used to control, track, and visualize the results generated from every test (Ex 4.2, 4.3, and 4.4) in Paraview, as explained in continuation for Exercise 4.6 
 
 ### Executing heat_distribution.py
 
@@ -62,13 +57,14 @@ Then, run the following command to run the particles code:
 The arguments are: [iterations] [dump frequency] [initial data] [particle type] [time step]
 
 To run the particles code for material point: 
-
+```
 ./particles 10 1 ./heat_distribution.csv material_point 0.0001
+```
 
 **Exercise 4.5:** 
 _Implement a python script to generate a heat distribution within a provided radius as given in Equation (5).Explain in the README how you integrate this condition within the existing code._
 
-A circular heat distribution is generated with $`x^2 + y^2 < R`$ Equation. As a result a CSV file for the heat distribution (heat_distribution.csv) is generated with the information of positions, velocity, force, masses, temperature, ad heat rate. Generated CSV file can be used as an input file for the simulation through Paraview as explained in **Exercise 4.6**. 
+A circular heat distribution is generated with $`x^2 + y^2 < R`$ Equation. As a result, a CSV file for the heat distribution (heat_distribution.csv) is generated with the information of positions, velocity, force, masses, temperature, and heat rate. The generated CSV file can be used as an input file for the simulation through Paraview as explained in **Exercise 4.6**. 
 
 
 In the exercise, a boundary condition is specified for the temperature field, requiring it to be zero at the boundary of the domain and remain constant over time. To implement this boundary condition, a boolean variable named ```isBoundary``` is introduced in the material_point class. The purpose of this boolean member is to serve as a flag indicating whether a material point is located at the boundary. When ```isBoundary``` is set to true, the temperature is explicitly set to zero during the computation of temperatures at the boundaries. This ensures the enforcement of the specified boundary condition, maintaining a constant temperature of zero at the domain boundaries throughout the simulation.
@@ -78,20 +74,22 @@ _Describe how to launch such a simulation which will produce dumps observable wi
 
 Two options and descriptions on how to launch a simulation for a grid of 512 × 512 particles. The preferred option is Option 1.
   
-**Option 1: Direcly from generated python file in Excercise 4.5:**
-    cd ..
-    python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 512 --num_particles_y 512 --plot --radius 0.8 --filename heat_distribution.csv
+**Option 1: Directly from the heat_distribution.py file produced in Excercise 4.5:**  
 
-    This will generate heat_distribution.csv file with a grid of 512 × 512 particles
+```
+cd ..
+python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 512 --num_particles_y 512 --plot --radius 0.8 --filename heat_distribution.csv
+```
+This will generate `heat_distribution.csv` file with a grid of 512 × 512 particles
 
-Required steps to launch the simulation with Paraview:
+Required steps to visualize the simulation with Paraview:
 1. File > Open > 'heat_distribution.csv' > Open Data With CSV Reader
 2. In the Properties window
     - Deselect 'Have Headers'
     - Change 'Field Delimiter Characters' to space as ' '
     - Click on Apply
 3. On the menu, go to Filters > Search and search for 'Table to Points' and press enter
-    Shortcut to perform this option is to pres Ctrl + Space and start typing 'Table to Points' and after press enter
+    The shortcut to perform this option is to press Ctrl + Space and start typing 'Table to Points' and after pressing enter
 4. In the Properties window 
     - Choose X,Y, and Z columns as Field 0 for X Column, Field 1 for Y Column, and Field 2 for Z Column
     - Select 2D points
@@ -100,12 +98,12 @@ Required steps to launch the simulation with Paraview:
     - Under Display (GeometryRepresentation) change Coloring to Field 10 for temperature visulatization, Field 11 for the heat visualization
     - Click show/hide color legend for the legend visualization 
 
-**Option 2:** From dumps direction, after executing the particles code:**
+**Option 2:** From the `dumps` directory, after executing the particles code:**
     
     cd build
     cd dumps
 
-Required steps to launch the simulation with Paraview:
+Required steps to visualize the simulation with Paraview:
 1. File > Open > 'step-00000.csv' > Open Data With CSV Reader
 2. In the Properties window
     - Deselect 'Have Headers'
@@ -121,7 +119,7 @@ Required steps to launch the simulation with Paraview:
     - Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
     - Click show/hide color legend for the legend visualization 
 
-Results observed from Paraview simulation are presented below for temperature visualization and heat visualisation respectively:
+Results from Paraview are presented below for temperature and heat respectively:
 
 <p align="left">
   <img src="HW3/figures/temperature_visualization.png" width="1000" />
