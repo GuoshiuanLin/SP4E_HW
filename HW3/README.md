@@ -4,7 +4,7 @@ This is the homework for SP4E 2023 Assignment 3
 
 ### Authors
 - Jakov Oreb: exercise 1 & 4
-- Guo-Shiuan Lin: exercise 2 & 3 \
+- Guo-Shiuan Lin: exercise 2 & 3 
  
 ### Prerequisites
 - C++ Compiler
@@ -18,7 +18,7 @@ git clone https://github.com/GuoshiuanLin/SP4E_HW.git
 cd SP4E_HW/HW3
 mkdir build
 cd build 
-cmake ..
+cmake DENABLE_FFT=ON .. # turn to OFF to disable FFT
 make
 ```
 
@@ -46,17 +46,15 @@ Generated .csv files can be used to control, track, and visualize the results ge
 
 ### Main Classes
 #### `MaterialPoint`
-access material data via `getTemperature()` and `getHeatrate()`
+`MaterialPoint` provides access to material data via `getTemperature()` and `getHeatrate()`
 #### `Matrix`
-compute approximation of Pi using integers from 1, 2, ..., to N
-#### `RiemannIntegral`
-compute Riemann integral of one of the three functions
-#### `WriteSeries`
-write results at every step to file output.fileType
-#### `PrintSeries`
-print results at defined frequency to screen and save in print_output.txt
+`Matrix` represents a square matrix.  It defines two iterators: `MatrixIterator` for iterating over matrix elements and `MatrixIndexIterator` for iterating over matrix indices and values 
+#### `MaterialPointsFactory`
+It includes functionalities such as creating particles `createParticle()`, creating a simulation system `createSimulation()`. It provides a singleton instance of the material points factory via `getInstance()`.
+#### `fft`
+`fft` implements the Fast Fourier Transform (FFT) using the FFTW library. To perform FFT on a complex matrix: `transform(inputMatrix)`; to perform Inverse FFT on a complex matrix: `itransform(fftResult)`; to compute frequencies for a given size: `computeFrequencies(4)`. 
 
-### Executing heat_distribution.py
+### Generating initial heat distribution
 
 ```python
 python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 10 --num_particles_y 10 --plot --radius 0.8 --filename heat_distribution.csv
@@ -75,12 +73,15 @@ It is important to note that there should be a folder named ```dumps``` under th
 ```
 cd build
 mkdir dumps
+./particles arg1 arg2 arg3 arg4 arg5
 ```
+- arg1: int, number of iterations
+- arg2: int, dump frequency
+- arg3: str, file with initial heat distribution, e.g., ./heat_distribution.csv
+- arg4: str, particle type, e.g., material_point
+- arg5: float, time step
 
-Then, run the following command to run the particles code:
-The arguments are: [iterations] [dump frequency] [initial data] [particle type] [time step]
-
-To run the particles code for material point: 
+For example,
 ```
 ./particles 10 1 ./heat_distribution.csv material_point 0.0001
 ```
