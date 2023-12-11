@@ -1,8 +1,20 @@
 ### Homework 3
+## Introduction 
+This is the homework for SP4E 2023 Assignment 3
 
+### Authors
+- Jakov Oreb: exercise 1 & 4
+- Guo-Shiuan Lin: exercise 2 & 3 \
+ 
+### Prerequisites
+- C++ Compiler
+- python
+- matplotlib
+  
 ### Running the program
 Build the program as the following: 
 ```
+git clone https://github.com/GuoshiuanLin/SP4E_HW.git
 cd SP4E_HW/HW3
 mkdir build
 cd build 
@@ -31,6 +43,18 @@ test_temp file for each test refers to CSV Writer creating a file inside the bui
 For example for Excercise 4.2, 4.3 and 4.4 written files are "homogeneous_temperature.csv", "sinus_vol_heat.csv" and "lin_vol_heat.csv" respectively.
 
 Generated .csv files can be used to control, track, and visualize the results generated from every test (Ex 4.2, 4.3, and 4.4) in Paraview, as explained in continuation for Exercise 4.6 
+
+### Main Classes
+#### `MaterialPoint`
+access material data via `getTemperature()` and `getHeatrate()`
+#### `Matrix`
+compute approximation of Pi using integers from 1, 2, ..., to N
+#### `RiemannIntegral`
+compute Riemann integral of one of the three functions
+#### `WriteSeries`
+write results at every step to file output.fileType
+#### `PrintSeries`
+print results at defined frequency to screen and save in print_output.txt
 
 ### Executing heat_distribution.py
 
