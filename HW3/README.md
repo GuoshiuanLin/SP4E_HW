@@ -59,13 +59,13 @@ It includes functionalities such as creating particles `createParticle()`, creat
 ```python
 python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 10 --num_particles_y 10 --plot --radius 0.8 --filename heat_distribution.csv
 ```
-Where:
-```x_limits```          - limits of X coordinates (upper and lower)
-```y_limits```          - limits of Y coordinates (upper and lower)
-```num_particles_x```   - number of particles (in X direction)
-```num_particles_y```   - number of particles (in Y direction)
-```radius```            - provided radius for heat distribution
-```filename```          - name of the output file
+
+```x_limits```          - limits of X coordinates (upper and lower)\
+```y_limits```          - limits of Y coordinates (upper and lower)\
+```num_particles_x```   - number of particles (in X direction)\
+```num_particles_y```   - number of particles (in Y direction)\
+```radius```            - provided radius for heat distribution\
+```filename```          - name of the output file\
 
 ### Executing particles code
 It is important to note that there should be a folder named ```dumps``` under the build directory. To have that file, first, you have to create it, running the following:
@@ -129,20 +129,7 @@ Required steps to visualize the simulation with Paraview:
     cd dumps
 
 Required steps to visualize the simulation with Paraview:
-1. File > Open > 'step-00000.csv' > Open Data With CSV Reader
-2. In the Properties window
-    - Deselect 'Have Headers'
-    - Change 'Field Delimiter Characters' to space as ' '
-    - Click on Apply
-3. On the menu, go to Filters > Search and search for 'Table to Points' and press enter
-    Shortcut to perform this option is to pres Ctrl + Space and start typing 'Table to Points' and after press enter
-4. In the Properties window 
-    - Choose X,Y, and Z columns as Field 0 for X Column, Field 1 for Y Column, and Field 2 for Z Column
-    - Select 2D points
-    - Click Apply
-    - Mark an "eye" on generated "TableToPoints1"
-    - Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
-    - Click show/hide color legend for the legend visualization 
+Same as above, except in step 4, Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
 
 Results from Paraview are presented below for temperature and heat respectively:
 
