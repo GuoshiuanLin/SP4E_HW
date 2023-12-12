@@ -3,13 +3,16 @@
 This is the homework for SP4E 2023 Assignment 3
 
 ### Authors
-- Jakov Oreb: exercise 1 & 4
-- Guo-Shiuan Lin: exercise 2 & 3 
+- Jakov Oreb
+- Guo-Shiuan Lin
  
 ### Prerequisites
-- C++ Compiler
-- python
-- matplotlib
+- cmake minimum required (VERSION 3.1)
+- C++ Compiler (-std=c++14)
+- FFTW version 3.3.10
+- python 3.11
+- numpy v 1.23.4
+- matplotlib v 3.6.2
   
 ### Running the program
 Build the program as the following: 
@@ -97,9 +100,7 @@ In the exercise, a boundary condition is specified for the temperature field, re
 **Exercise 4.6:** 
 _Describe how to launch such a simulation which will produce dumps observable with Paraview for a grid of 512 × 512 particles._
 
-Two options and descriptions on how to launch a simulation for a grid of 512 × 512 particles. The preferred option is Option 1.
-  
-**Option 1: Directly from the heat_distribution.py file produced in Excercise 4.5:**  
+Description on how to launch a simulation for a grid of 512 × 512 particles is explained as follows:
 
 ```
 cd ..
@@ -123,22 +124,5 @@ Required steps to visualize the simulation with Paraview:
     - Under Display (GeometryRepresentation) change Coloring to Field 10 for temperature visulatization, Field 11 for the heat visualization
     - Click show/hide color legend for the legend visualization 
 
-**Option 2:** From the `dumps` directory, after executing the particles code:**
-    
-    cd build
-    cd dumps
-
-Required steps to visualize the simulation with Paraview:
-Same as above, except in step 4, Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
-
-Results from Paraview are presented below for temperature and heat respectively:
-
-<p align="left">
-  <img src="HW3/figures/temperature_visualization.png" width="1000" />
-</p>
-
-<p align="left">
-  <img src="HW3/figures/heat_visualization.png" width="1000" />
-</p>
-
+Results from Paraview are presented in folder SP4E/HW3/figures for both temperature visulatization and heat visualization.
 
