@@ -28,7 +28,10 @@ make
 ### Running the tests
 After building the program as explained in the previous step, it is possible to run the tests as following:
 
-For the FFT transform test:
+For the FFT transform test:\
+Compute the frequencies using `numpy.fft.freq` first to compare with the results from FFTW:\
+`python numpy_fft.py n`\
+`n` should be an interger representing the lengh of the square matrix
 ```
 cd build
 ./test_fft
@@ -100,6 +103,7 @@ In the exercise, a boundary condition is specified for the temperature field, re
 **Exercise 4.6:** 
 _Describe how to launch such a simulation which will produce dumps observable with Paraview for a grid of 512 × 512 particles._
 
+
 Description on how to launch a simulation for a grid of 512 × 512 particles is explained as follows:
 
 ```
@@ -124,5 +128,9 @@ Required steps to visualize the simulation with Paraview:
     - Under Display (GeometryRepresentation) change Coloring to Field 10 for temperature visulatization, Field 11 for the heat visualization
     - Click show/hide color legend for the legend visualization 
 
+Visualize results from the `dumps` directory using paraView:
+Same as above, except in step 4, Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
+
 Results from Paraview are presented in folder SP4E/HW3/figures for both temperature visulatization and heat visualization.
+
 
