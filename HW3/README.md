@@ -25,7 +25,10 @@ make
 ### Running the tests
 After building the program as explained in the previous step, it is possible to run the tests as following:
 
-For the FFT transform test:
+For the FFT transform test:\
+Compute the frequencies using `numpy.fft.freq` first to compare with the results from FFTW:\
+`python numpy_fft.py n`\
+`n` should be an interger representing the lengh of the square matrix
 ```
 cd build
 ./test_fft
@@ -97,10 +100,6 @@ In the exercise, a boundary condition is specified for the temperature field, re
 **Exercise 4.6:** 
 _Describe how to launch such a simulation which will produce dumps observable with Paraview for a grid of 512 × 512 particles._
 
-Two options and descriptions on how to launch a simulation for a grid of 512 × 512 particles. The preferred option is Option 1.
-  
-**Option 1: Directly from the heat_distribution.py file produced in Excercise 4.5:**  
-
 ```
 cd ..
 python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 512 --num_particles_y 512 --plot --radius 0.8 --filename heat_distribution.csv
@@ -123,22 +122,9 @@ Required steps to visualize the simulation with Paraview:
     - Under Display (GeometryRepresentation) change Coloring to Field 10 for temperature visulatization, Field 11 for the heat visualization
     - Click show/hide color legend for the legend visualization 
 
-**Option 2:** From the `dumps` directory, after executing the particles code:**
-    
-    cd build
-    cd dumps
-
-Required steps to visualize the simulation with Paraview:
+Visualize results from the `dumps` directory using paraView:
 Same as above, except in step 4, Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
 
-Results from Paraview are presented below for temperature and heat respectively:
-
-<p align="left">
-  <img src="HW3/figures/temperature_visualization.png" width="1000" />
-</p>
-
-<p align="left">
-  <img src="HW3/figures/heat_visualization.png" width="1000" />
-</p>
+Results from Paraview are presented in the `figures` folder
 
 
