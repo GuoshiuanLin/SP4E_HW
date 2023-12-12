@@ -3,13 +3,16 @@
 This is the homework for SP4E 2023 Assignment 3
 
 ### Authors
-- Jakov Oreb: exercise 1 & 4
-- Guo-Shiuan Lin: exercise 2 & 3 
+- Jakov Oreb
+- Guo-Shiuan Lin
  
 ### Prerequisites
-- C++ Compiler
-- python
-- matplotlib
+- cmake minimum required (VERSION 3.1)
+- C++ Compiler (-std=c++14)
+- FFTW version 3.3.10
+- python 3.11
+- numpy v 1.23.4
+- matplotlib v 3.6.2
   
 ### Running the program
 Build the program as the following: 
@@ -100,6 +103,9 @@ In the exercise, a boundary condition is specified for the temperature field, re
 **Exercise 4.6:** 
 _Describe how to launch such a simulation which will produce dumps observable with Paraview for a grid of 512 × 512 particles._
 
+
+Description on how to launch a simulation for a grid of 512 × 512 particles is explained as follows:
+
 ```
 cd ..
 python3 heat_distribution.py --x_limits -1.0 1.0 --y_limits -1.0 1.0 --num_particles_x 512 --num_particles_y 512 --plot --radius 0.8 --filename heat_distribution.csv
@@ -125,6 +131,6 @@ Required steps to visualize the simulation with Paraview:
 Visualize results from the `dumps` directory using paraView:
 Same as above, except in step 4, Under Display (GeometryRepresentation) change Coloring to Field 12 for temperature visulatization, Field 14 for the heat visualization
 
-Results from Paraview are presented in the `figures` folder
+Results from Paraview are presented in folder SP4E/HW3/figures for both temperature visulatization and heat visualization.
 
 
