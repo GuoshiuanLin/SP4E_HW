@@ -134,11 +134,11 @@ Same as above, except in step 4, Under Display (GeometryRepresentation) change C
 Results from Paraview are presented below for temperature and heat respectively:
 
 <p align="left">
-  <img src="HW3/figures/temperature_visualization.png" width="1000" />
+  <img src="SP4E_HW/HW3/figures/temperature_visualization.png" width="1000" />
 </p>
 
 <p align="left">
-  <img src="HW3/figures/heat_visualization.png" width="1000" />
+  <img src="SP4E_HW/HW3/figures/heat_visualization.png" width="1000" />
 </p>
 
 
