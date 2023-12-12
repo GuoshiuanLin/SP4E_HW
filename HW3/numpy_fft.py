@@ -1,36 +1,29 @@
 """
 Python script using NumPy to compute Fourier frequencies with numpy.fft.fftfreq.
-Adjust the array size to analyze different matrices.
+Given arg as the array size
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
+import sys
 
-# Number of data points
-n = 1000
+# the only argument is the maxtric size n
+n = int(sys.argv[1])
+print(f'size of the matirx: {n}')
 
-# Sample spacing
-d = 0.01
+# compute frequencies based on the size
+frequencies = np.fft.fftfreq(n)
+frequencies = np.round(frequencies, decimals=4)
 
-# Generate a simple signal (e.g., a sum of two sinusoids)
-t = np.linspace(0.0, n * d, n, endpoint=False)
-signal = 0.5 * np.sin(2.0 * np.pi * 5.0 * t) + 0.3 * np.sin(2.0 * np.pi * 20.0 * t)
+# save the frequncies as 2-D matrix to be compared with the results from fft computeFrequencies
+result_matrix = np.empty((n, n), dtype=tuple)
+for i in range(n):
+    for j in range(n):
+        result_matrix[i, j] = (frequencies[i], frequencies[j])
 
-# Compute FFT
-fft_result = np.fft.fft(signal)
+print('numpy-computed frequencies:')
+print(result_matrix) 
 
-# Generate frequencies
-frequencies = np.fft.fftfreq(n, d)
-
-# Plot the original signal and its frequency spectrum
-plt.subplot(2, 1, 1)
-plt.plot(t, signal)
-plt.title('Original Signal')
-
-plt.subplot(2, 1, 2)
-plt.plot(frequencies, np.abs(fft_result))
-plt.title('Frequency Spectrum')
-plt.xlabel('Frequency (Hz)')
-
-plt.tight_layout()
-plt.show()
+with open('numpy_computed_frequencies.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(result_matrix)
