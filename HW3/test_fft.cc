@@ -67,8 +67,8 @@ TEST(FFT, inverse_transform) {
 /*****************************************************************/
 
 TEST(FFT, ComputeFrequenciesTest) {
-
-    const std::string csvFilePath = "numpy_computed_frequencies.csv";
+    //std::cout << "Current Working Directory: " << std::filesystem::current_path() << std::endl;
+    const std::string csvFilePath = "../numpy_computed_frequencies.csv";
 
     // Read data from the CSV file
     std::ifstream file(csvFilePath);
@@ -83,14 +83,15 @@ TEST(FFT, ComputeFrequenciesTest) {
     // Iterate through the CSV file and compare values with the expected result
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
-            // Read the complex number from the CSV file
-            std::complex<int> csvValue;
+            std::complex<float> csvValue;
             file >> csvValue;
-
-            // Compare with the expected result
-            EXPECT_EQ(csvValue, expectedResult(i, j)) << "Mismatch at position (" << i << ", " << j << ")";
+            // the test doen't pass because somehow we have problem reading the CSV file!
+            // std::cout << "CSV Value: " << csvValue  << ", Expected Result: " << expectedResult(i, j) << std::endl;
+            // Use ASSERT_NEAR for floating-point or complex numbers
+            ASSERT_NEAR(csvValue.real(), expectedResult(i, j).real(), 1e-6);
+            ASSERT_NEAR(csvValue.imag(), expectedResult(i, j).imag(), 1e-6);
         }
-    }
+        }
 
     // Close the file
     file.close();
