@@ -13,7 +13,7 @@ print(f'size of the matirx: {n}')
 
 # compute frequencies based on the size
 frequencies = np.fft.fftfreq(n)
-frequencies = np.round(frequencies, decimals=4)
+frequencies = np.round(frequencies, decimals=4) * n
 
 # save the frequncies as 2-D matrix to be compared with the results from fft computeFrequencies
 result_matrix = np.empty((n, n), dtype=tuple)
