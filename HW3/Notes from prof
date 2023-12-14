@@ -1,6 +1,0 @@
-  751  nm -AC libpart.a
-  752  nm -AC libpart.a |grep T
-  753  nm -AC libpart.a |grep "T "
-  754  nm -AC libpart.a |grep -i fftw
-  755  nm -A libpart.a |grep "T "
-  756  nm -AC libpart.a |grep "T 
