@@ -33,20 +33,20 @@ PYBIND11_MODULE(pypart, m) {
         .def_property("delta_t", &ComputeTemperature::getDeltat, &ComputeTemperature::getDeltat)
         .def_readwrite("implicit", &ComputeTemperature::implicit);
 
-    // Example: Bind CSVWriter class
-    py::class_<CSVWriter>(m, "CSVWriter")
+    // Bind CsvWriter class
+    py::class_<CsvWriter>(m, "CsvWriter")
         .def(py::init<const std::string&>())
-        .def("write", &CSVWriter::write);
+        .def("write", &CsvWriter::write);
     
-    // Bind Compute class
-    py::class_<Compute>(m, "Compute")
-        .def(py::init<>())
-        .def("compute", &Compute::compute);
+    // // Bind Compute class
+    // py::class_<Compute>(m, "Compute")
+    //     .def(py::init<>())
+    //     .def("compute", &Compute::compute);
 
     // Bind ComputeInteraction class
     py::class_<ComputeInteraction, Compute>(m, "ComputeInteraction")
         .def(py::init<>())
-        .def("compute", &ComputeInteraction::compute);
+        .def("applyOnPairs", &ComputeInteraction::applyOnPairs);
 
     // Bind ComputeGravity class
     py::class_<ComputeGravity, Compute>(m, "ComputeGravity")
@@ -58,30 +58,48 @@ PYBIND11_MODULE(pypart, m) {
         .def(py::init<>())
         .def("compute", &ComputeVerletIntegration::compute);
     
-    // Example: Bind ParticlesFactory class
-    py::class_<ParticlesFactory>(m, "ParticlesFactory")
-        .def(py::init<>())
-        .def("createParticles", &ParticlesFactory::createParticles);
 
-    // Example: Bind MaterialPointsFactory class
+    // Bind MaterialPointsFactory class
     py::class_<MaterialPointsFactory>(m, "MaterialPointsFactory")
         .def(py::init<>())
-        .def("createMaterialPoint", &MaterialPointsFactory::createMaterialPoint);
+        .def("getInstance", &MaterialPointsFactory::getInstance);///
 
-    // Example: Bind PingPongBallsFactory class
+    // Bind PingPongBallsFactory class
     py::class_<PingPongBallsFactory>(m, "PingPongBallsFactory")
         .def(py::init<>())
-        .def("createPingPongBall", &PingPongBallsFactory::createPingPongBall);
+        .def("getInstance", &PingPongBallsFactory::getInstance);///
 
-    // Example: Bind PlanetsFactory class
+    // Bind PlanetsFactory class
     py::class_<PlanetsFactory>(m, "PlanetsFactory")
         .def(py::init<>())
-        .def("createPlanet", &PlanetsFactory::createPlanet);
+        .def("getInstance", &PlanetsFactory::getInstance);///
 
-    // Example: Bind ParticlesFactoryInterface class
+    // Bind ParticlesFactoryInterface class
     py::class_<ParticlesFactoryInterface>(m, "ParticlesFactoryInterface")
         .def(py::init<>())
-        .def("getInstance", &ParticlesFactoryInterface::getInstance);
+        .def("getInstance", &ParticlesFactoryInterface::getInstance)
+        .def("createSimulation",
+            py::overload_cast<const std::string&, Real, py::function>(
+                &ParticlesFactoryInterface::createSimulation<py::function>),
+            py::return_value_policy::reference)
+        .def(
+            "createSimulation",
+            [](ParticlesFactoryInterface& self, const std::string& fname,
+            Real timestep) -> SystemEvolution& {
+            return self.createSimulation(fname, timestep);
+            },
+            py::return_value_policy::reference);
+
+    // Bind SystemEvolution class
+    py::class_<SystemEvolution>(m, "SystemEvolution")
+        .def(py::init<std::unique_ptr<System>>())
+        .def("evolve", &SystemEvolution::evolve)
+        .def("addCompute", &SystemEvolution::addCompute)
+        .def("setNSteps", &SystemEvolution::setNSteps)
+        .def("setDumpFreq", &SystemEvolution::setDumpFreq)
+        .def("getSystem", &SystemEvolution::getSystem, py::return_value_policy::reference_internal); // Assuming getSystem returns a reference
+
+    
 }
 
 PYBIND11_MODULE(pypart, m) {
