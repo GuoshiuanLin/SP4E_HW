@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
 
 namespace py = pybind11;
 
@@ -13,6 +14,8 @@ namespace py = pybind11;
 #include "compute_temperature.hh"
 #include "compute_verlet_integration.hh"
 #include "particles_factory_interface.hh"
+#include "system.hh"
+#include "system_evolution.hh"
 
 PYBIND11_MODULE(pypart, m) {
 
@@ -81,4 +84,18 @@ PYBIND11_MODULE(pypart, m) {
         .def("getInstance", &ParticlesFactoryInterface::getInstance);
 }
 
+PYBIND11_MODULE(pypart, m) {
+    m.doc() = "pybind of the Particles project";
 
+    bindComputeTemperature(m);
+    bindCsvWriter(m);
+    bindCompute(m);
+    bindComputeInteraction(m);
+    bindComputeGravity(m);
+    bindComputeVerletIntegration(m);
+    bindParticlesFactory(m);
+    bindMaterialPointsFactory(m);
+    bindPingPongBallsFactory(m);
+    bindPlanetsFactory(m);
+    bindParticlesFactoryInterface(m);
+}
