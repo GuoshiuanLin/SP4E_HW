@@ -6,6 +6,27 @@ This is the homework for SP4E 2023 Assignment 4
 - Jakov Oreb
 - Guo-Shiuan Lin
 
+### Compiling
+
+`mkdir build`
+
+`cmake ..`
+
+`make`
+
+### To run the code
+`python main.py` `nsteps` `freq` `filename` `particle_type` `timestep`
+
+`nsteps`: number of steps to perform
+
+`freq`: frequency for dumps
+
+`filename`:start/input filename, e.g., `../init.csv`
+
+`particle_type`: `planet`, `ping_pong`, or `material_point`
+
+`timestep`: time step
+
 ### Textual Answers
 1.2. In class ParticlesFactory, createSimulation function has been overloaded to take functor as one of its argument. Comment on what this function is doing?
 
