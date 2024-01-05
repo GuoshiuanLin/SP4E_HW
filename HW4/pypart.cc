@@ -23,14 +23,13 @@ PYBIND11_MODULE(pypart, m) {
     py::class_<CsvWriter>(m, "CsvWriter")
         .def(py::init<const std::string&>())
         .def("write", &CsvWriter::write);
+
   // Bind Compute class
-    py::class_<Compute>(m, "Compute");
-        // .def(py::init<>())
-        // .def("compute", &Compute::compute);
+    py::class_<Compute, std::shared_ptr<Compute>>(m, "Compute");
+
   // Bind ComputeTemperature and make the private members accessible
     py::class_<ComputeTemperature>(m, "ComputeTemperature")
         .def(py::init<>())
-        .def("compute", &ComputeTemperature::compute)
         .def_property("conductivity", &ComputeTemperature::getConductivity, &ComputeTemperature::getConductivity)
         .def_property("capacity", &ComputeTemperature::getCapacity, &ComputeTemperature::getCapacity)
         .def_property("density", &ComputeTemperature::getDensity, &ComputeTemperature::getDensity)
@@ -39,67 +38,46 @@ PYBIND11_MODULE(pypart, m) {
         .def_readwrite("implicit", &ComputeTemperature::implicit);
 
     // Bind ComputeInteraction class
-    // py::class_<ComputeInteraction, Compute>(m, "ComputeInteraction")
-    //     .def(py::init<>())
-    //     // .def("applyOnPairs", &ComputeInteraction::applyOnPairs);
+    py::class_<ComputeInteraction, Compute, std::shared_ptr<ComputeInteraction>>(m, "ComputeInteraction");
 
     // Bind ComputeGravity class
-    py::class_<ComputeGravity, Compute>(m, "ComputeGravity")
+    py::class_<ComputeGravity, Compute, std::shared_ptr<ComputeGravity>>(m, "ComputeGravity")
         .def(py::init<>())
         .def("setG", &ComputeGravity::setG);
-        // .def("compute", &ComputeGravity::compute);
 
     // Bind ComputeVerletIntegration class
-    py::class_<ComputeVerletIntegration, Compute>(m, "ComputeVerletIntegration")
+    py::class_<ComputeVerletIntegration, Compute, std::shared_ptr<ComputeVerletIntegration>>(m, "ComputeVerletIntegration")
         .def(py::init<Real>())
         .def("addInteraction", &ComputeVerletIntegration::addInteraction);
 
     // Bind ParticlesFactoryInterface class
+    // Define 2 createSimulation with 2 and 3 arguments respectively because we didn't manage to use the overload_cast method
     py::class_<ParticlesFactoryInterface>(m, "ParticlesFactoryInterface")
-        // .def(py::init<>())
-        .def_static("getInstance", &ParticlesFactoryInterface::getInstance, py::return_value_policy::reference)
-        .def("createSimulation",
-            py::overload_cast<const std::string&, Real, py::function>(
-                &ParticlesFactoryInterface::createSimulation<py::function>),
-            py::return_value_policy::reference)
-        .def(
-            "createSimulation",
-            [](ParticlesFactoryInterface& self, const std::string& fname,
-            Real timestep) -> SystemEvolution& {
-            return self.createSimulation(fname, timestep);
-            },
-            py::return_value_policy::reference);
-
-    // // Bind MaterialPointsFactory class
-    // py::class_<MaterialPointsFactory, ParticlesFactoryInterface, std::unique_ptr<MaterialPointsFactory>>(m, "MaterialPointsFactory")
-    //     .def_static("getInstance", &MaterialPointsFactory::getInstance);
-
-    // // Bind PingPongBallsFactory class
-    // py::class_<PingPongBallsFactory, ParticlesFactoryInterface, std::unique_ptr<PingPongBallsFactory>>(m, "PingPongBallsFactory")
-    //     .def_static("getInstance", &MaterialPointsFactory::getInstance);
-
-    // // Bind PlanetsFactory class
-    // py::class_<PlanetsFactory, ParticlesFactoryInterface, std::unique_ptr<PlanetsFactory>>(m, "PlanetsFactory")
-    //     .def_static("getInstance", &MaterialPointsFactory::getInstance);
-
+        .def("getInstance", &ParticlesFactoryInterface::getInstance, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (ParticlesFactoryInterface::*)(const std::string &, Real))&ParticlesFactoryInterface::createSimulation, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (ParticlesFactoryInterface::*)(const std::string &, Real,py::function))&ParticlesFactoryInterface::createSimulation, py::return_value_policy::reference);
     py::class_<MaterialPointsFactory, ParticlesFactoryInterface>(m, "MaterialPointsFactory")
-        .def("getInstance", &MaterialPointsFactory::getInstance, py::return_value_policy::reference);
+        .def("getInstance", &MaterialPointsFactory::getInstance, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (MaterialPointsFactory::*)(const std::string &, Real))&MaterialPointsFactory::createSimulation, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (MaterialPointsFactory::*)(const std::string &, Real,py::function))&MaterialPointsFactory::createSimulation, py::return_value_policy::reference);
     py::class_<PingPongBallsFactory, ParticlesFactoryInterface>(m, "PingPongBallsFactory")
-        .def("getInstance", &PingPongBallsFactory::getInstance, py::return_value_policy::reference);
+        .def("getInstance", &PingPongBallsFactory::getInstance, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (PingPongBallsFactory::*)(const std::string &, Real))&PingPongBallsFactory::createSimulation, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (PingPongBallsFactory::*)(const std::string &, Real,py::function))&PingPongBallsFactory::createSimulation, py::return_value_policy::reference);
     py::class_<PlanetsFactory, ParticlesFactoryInterface>(m, "PlanetsFactory")
-        .def("getInstance", &PlanetsFactory::getInstance, py::return_value_policy::reference);
-
-
-
+        .def("getInstance", &PlanetsFactory::getInstance, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (PlanetsFactory::*)(const std::string &, Real))&PlanetsFactory::createSimulation, py::return_value_policy::reference)
+        .def("createSimulation",(SystemEvolution & (PlanetsFactory::*)(const std::string &, Real,py::function))&PlanetsFactory::createSimulation, py::return_value_policy::reference);
+    
+    py::class_<System>(m, "System");
+    
 
     // Bind SystemEvolution class
     py::class_<SystemEvolution>(m, "SystemEvolution")
-        // .def(py::init<std::unique_ptr<System>>())
         .def("evolve", &SystemEvolution::evolve)
-        .def("addCompute", &SystemEvolution::addCompute);
-        // .def("setNSteps", &SystemEvolution::setNSteps)
-        // .def("setDumpFreq", &SystemEvolution::setDumpFreq)
-        // .def("getSystem", &SystemEvolution::getSystem, py::return_value_policy::reference_internal); // Assuming getSystem returns a reference
-
-    
+        .def("addCompute", &SystemEvolution::addCompute)
+        .def("setNSteps", &SystemEvolution::setNSteps)
+        .def("setDumpFreq", &SystemEvolution::setDumpFreq)
+        .def("getSystem", &SystemEvolution::getSystem); 
+  
 }
