@@ -6,15 +6,18 @@ This is the homework for SP4E 2023 Assignment 4
 - Jakov Oreb
 - Guo-Shiuan Lin
 
-### Compiling
+### Compile the code before running simulation
 
 `mkdir build`
 
 `cmake ..`
 
 `make`
+### Create dumps folder for holding output files
 
-### To run the code
+`mkdir dumps`
+
+### To run the simulation
 `python main.py` `nsteps` `freq` `filename` `particle_type` `timestep`
 
 `nsteps`: number of steps to perform
