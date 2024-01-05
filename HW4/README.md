@@ -1,4 +1,7 @@
 ### Homework 4
+### Updated:
+Now the part on pybind (pypart.cc) is done!
+
 ## Introduction 
 This is the homework for SP4E 2023 Assignment 4
 
