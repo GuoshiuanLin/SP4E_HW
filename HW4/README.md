@@ -34,7 +34,7 @@ This is the homework for SP4E 2023 Assignment 4
 `timestep`: time step
 E.g., 
 
-python main.py 30 1 ../init.csv planet 1
+`python main.py 30 1 ../init.csv planet 1`
 
 ### Textual Answers
 1.2. In class ParticlesFactory, createSimulation function has been overloaded to take functor as one of its argument. Comment on what this function is doing?
