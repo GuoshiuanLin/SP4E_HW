@@ -2,7 +2,6 @@
 
 import sys
 import argparse
-import pypart
 
 from pypart import MaterialPointsFactory, ParticlesFactoryInterface
 from pypart import PingPongBallsFactory, PlanetsFactory
@@ -13,6 +12,7 @@ from pypart import ComputeVerletIntegration
 
 import exercise5
 import exercise6
+import exercise7
 
 
 def main(nsteps, freq, filename, particle_type, timestep):
@@ -111,6 +111,9 @@ if __name__ == "__main__":
         exercise5.compute(args.planet_name, args.directory, args.directory_ref, args.plot)
     elif args.exercise == 'launchsim':
         exercise6.launchsim(args.planet_name, args.filename, args.nb_steps, args.freq, args.scale, args.plot)
+    elif args.exercise == 'optimization':
+        exercise7.optimization(args.planet_name, args.filename, args.nb_steps, args.freq,
+                               args.max_iter, args.init_guess, args.plot)    
     else:
         print("Unknown exercise:", args.exercise)
         sys.exit(-1)
