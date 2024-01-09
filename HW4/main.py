@@ -74,7 +74,7 @@ def main(nsteps, freq, filename, particle_type, timestep):
     dumper.write(evol.getSystem())
 
     evol.setNSteps(nsteps)
-    evol.setDumpFreq(freq)
+    evol.setDumpFreq(freq) 
     evol.evolve()
 
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Particles code')
     parser.add_argument('--exercise', type=str, help='Specify the name of the exercise (main, compute, launchsim, optimization)')
-    
+        
     # Common arguments for exercises
     parser.add_argument('--planet_name', type=str, help='Specify the name of the planet')
     parser.add_argument('--plot', action='store_true', help='Plot the resulting trajectories')
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     # Execute the selected exercise based on the provided argument
     if args.exercise == 'main':
-        main(args)
+        main(args.nb_steps, args.freq, args.filename, args.particle_type, args.timestep)
     elif args.exercise == 'compute':
         exercise5.compute(args.planet_name, args.directory, args.directory_ref, args.plot)
     elif args.exercise == 'launchsim':
@@ -117,4 +117,3 @@ if __name__ == "__main__":
     else:
         print("Unknown exercise:", args.exercise)
         sys.exit(-1)
-

@@ -23,10 +23,13 @@ def readPosition(planet_name: str, csv_file_path: str) -> np.ndarray:
         csvreader = csv.reader(file, delimiter=' ')
 
         for row in csvreader:
-            if planet_name.lower() in row:
+            # Check for case - insensitive match 
+            if planet_name.lower() in [x.lower() for x in row]:
                 # drop empty elements and convert to numpy array
                 new_row = np.array([float(x) for x in row if x != ''])
                 return new_row[:3]
+    # If no match is found, return an array of NaN
+    return np.array([np.nan, np.nan, np.nan])
 
 def readPositions(planet_name: str, directory: str) -> np.ndarray:
     """Reads the position of the planet from all the files in a given directory.
@@ -87,8 +90,8 @@ def compute(planet_name: str, directory: str, directory_ref: str, plot: int):
         # Plotting the trajectories
         fig, axs = plt.subplots(1, 3, figsize=(12, 3))
         for i, ax_name in enumerate(['x', 'y', 'z']):
-            axs[i].plot(positions[:, i], label='computed', lw=1.7, color='firebrick')
-            axs[i].plot(positions_ref[:, i], ':', label='reference', lw=1.7, color='steelblue')
+            axs[i].plot(positions[:, i], label='computed', lw=1.7, color='red')
+            axs[i].plot(positions_ref[:, i], ':', label='reference', lw=1.7, color='blue')
             axs[i].set_ylabel(ax_name)
             axs[i].set_xlabel('Days [#]')
 

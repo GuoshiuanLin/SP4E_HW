@@ -110,8 +110,8 @@ def runAndComputeError(scale: float, planet_name: str, input: str, nb_steps: int
     if plot:
         fig, axs = plt.subplots(1, 3, figsize=(12, 3))
         for i, ax_name in enumerate(['x', 'y', 'z']):
-            axs[i].plot(positions[:, i], label='computed', lw=1.7, color='firebrick')
-            axs[i].plot(positions_ref[:, i], ':', label='reference', lw=1.7, color='steelblue')
+            axs[i].plot(positions[:, i], label='computed', lw=1.7, color='red')
+            axs[i].plot(positions_ref[:, i], ':', label='reference', lw=1.7, color='blue')
             axs[i].set_ylabel(ax_name)
             axs[i].set_xlabel('Days [#]')
 
