@@ -26,7 +26,6 @@ git clone https://github.com/GuoshiuanLin/SP4E_HW.git
 cd SP4E_HW/HW4
 mkdir build
 cd build 
-cmake USE_PYTHON "Use pybind library" = ON .. # We can maybe put ON in CMakeLists.txt 
 make
 ```
 
