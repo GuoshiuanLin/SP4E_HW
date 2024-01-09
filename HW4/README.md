@@ -25,7 +25,8 @@ Build the program as the following:
 git clone https://github.com/GuoshiuanLin/SP4E_HW.git
 cd SP4E_HW/HW4
 mkdir build
-cd build 
+cd build
+cmake ..
 make
 ```
 
