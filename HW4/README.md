@@ -17,6 +17,7 @@ This is the homework for SP4E 2023 Assignment 4
 - python 3.11
 - numpy v 1.23.4
 - matplotlib v 3.6.2
+- pybind11 v2.12.0
 
 ### Compile the code before running simulation
 
