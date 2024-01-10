@@ -30,6 +30,24 @@ cmake ..
 make
 ```
 
+### Important Note:
+If you receive submodule error (for example: "eigen is missing") run the following commands in the repository's root direction:
+```
+$ git submodule add -f https://gitlab.com/libeigen/eigen.git
+$ git submodule add -f https://github.com/pybind/pybind11.git
+```
+
+If you receive and error "google test is missing you can clone googletest from the GitHub and build it separately, as following:
+```
+git clone https://github.com/google/googletest.git
+cd googletest
+mkdir build
+cd build
+cmake ..
+make
+```
+After following this note, you will be able to build the progra
+
 ### Create dumps folder for holding output files
 
 `mkdir dumps`
