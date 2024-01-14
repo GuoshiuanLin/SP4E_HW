@@ -53,22 +53,6 @@ After following this note, you will be able to build the progra
 
 `mkdir dumps`
 
-### To run the simulation
-`python main.py` `nsteps` `freq` `filename` `particle_type` `timestep`
-
-`nsteps`: number of steps to perform
-
-`freq`: frequency for dumps
-
-`filename`:start/input filename, e.g., `../init.csv`
-
-`particle_type`: `planet`, `ping_pong`, or `material_point`
-
-`timestep`: time step
-
-E.g., 
-
-`python main.py 30 1 ../init.csv planet 1`
 
 ### Exercise 4: Units of the code
 To simulate the planet trajectories for 365 days with a timestep of 1 day, run the following command:
