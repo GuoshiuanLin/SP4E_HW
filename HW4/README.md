@@ -151,4 +151,4 @@ In this case, users can choose between "planet" and 'material_point'.
 
 2.2. How will you ensure that references to Compute objects type are correctly managed in the pythonbindings?
 
-One can use the py::return_value_policy when binding methods that return references or pointers to Compute objects. The correct policy depends on the ownership and lifetime management strategy of the underlying C++ objects.
+One can use the py::return_value_policy when binding methods to decide whether return references or pointers to Compute objects. The correct policy depends on the ownership and lifetime management strategy of the C++ objects.
