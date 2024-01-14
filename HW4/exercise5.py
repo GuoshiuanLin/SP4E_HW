@@ -26,8 +26,8 @@ def readPosition(planet_name: str, csv_file_path: str) -> np.ndarray:
             # Check for case - insensitive match 
             if planet_name.lower() in [x.lower() for x in row]:
                 # drop empty elements and convert to numpy array
-                new_row = np.array([float(x) for x in row if x != ''])
-                return new_row[:3]
+                new_row = np.array([float(x) for x in row[1:4] if x != ''])
+                return new_row
     # If no match is found, return an array of NaN
     return np.array([np.nan, np.nan, np.nan])
 
