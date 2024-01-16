@@ -70,12 +70,12 @@ def launchParticles(input: str, nb_steps: int, freq: int) -> None:
         self.system_evolution.addCompute(compute_verlet)
 
     evol = factory.createSimulation(input, timestep, createComputes)
-    dumper = CsvWriter("out.csv")
+    dumper = CsvWriter("dumps/out_step_{:04d}.csv")
     dumper.write(evol.getSystem())
     evol.setNSteps(nb_steps)
     evol.setDumpFreq(freq)
     evol.evolve()
-    print('Simulation for planet is saved at out.csv')
+    print('Simulation for planet is saved in the "dumps" folder as out.csv')
 
 def runAndComputeError(scale: float, planet_name: str, input: str, nb_steps: int, freq: int, plot: bool = False) -> float:
     """Runs the simulation and computes the error.
