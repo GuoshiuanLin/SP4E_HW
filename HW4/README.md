@@ -78,8 +78,8 @@ Required arguments to run the exercise:
 
 To compute the error of the simulation use this script:
 ```bash
-$ python3 main.py --exercise compute --planet_name mercury --directory dumps --directory_ref trajectories
-$ python3 main.py --exercise compute --planet_name mercury --directory dumps --directory_ref trajectories --plot
+$ python3 main.py --exercise compute --planet_name mercury --directory dumps --directory_ref ../trajectories
+$ python3 main.py --exercise compute --planet_name mercury --directory dumps --directory_ref ../trajectories --plot
 ```
 
 To plot the trajectories, add `--plot` to the command. Plot will be saved as a figure.
