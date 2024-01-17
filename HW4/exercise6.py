@@ -104,7 +104,6 @@ def runAndComputeError(scale: float, planet_name: str, input: str, nb_steps: int
 
     positions = readPositions(planet_name, 'dumps')
     positions_ref = readPositions(planet_name, '../trajectories')
-    print(positions)
 
     error = computeError(positions, positions_ref)
 
